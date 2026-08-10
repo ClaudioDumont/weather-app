@@ -1,22 +1,27 @@
 <div class="app-container">
-  <header class="header flex justify-between items-center mb-xl">
+  <header class="header">
     <div class="page-title">
-      <i class="fa-solid fa-meteor"></i> 
+      <i class="fa-solid fa-meteor"></i>
       WeatherNow
     </div>
     <app-unit-toggle />
   </header>
-  
-  <main>
 
+  <main>
     <h1>How's the sky loooking today?</h1>
-    <app-search-bar class="mb-xl" />
-    
-    <div class="main-content">
-      <app-weather-card class="card weather-main" />
-      <app-hourly-forecast class="card" />
-    </div>
-    
-    <app-daily-forecast class="card daily-forecast" />
+    <app-search-bar />
+
+    @if (state$ | async; as state) {
+      @if (state.current || state.loading || state.error) {
+        <div class="main-content">
+          <div class="main-content__left">
+            <app-weather-card />
+            <app-weather-metrics />
+            <app-daily-forecast />
+          </div>
+          <app-hourly-forecast />
+        </div>
+      }
+    }
   </main>
 </div>

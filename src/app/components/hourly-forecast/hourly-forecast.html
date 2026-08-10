@@ -1,1 +1,49 @@
-<p>hourly-forecast works!</p>
+<div class="hourly-forecast">
+  <div class="hourly-forecast__header">
+    <h2 class="section-title">Hourly forecast</h2>
+
+    <div class="day-select">
+      <button
+        type="button"
+        class="day-select__trigger"
+        (click)="toggleDropdown()"
+        [disabled]="isLoading() || !selectedDate()"
+      >
+        {{ !isLoading() && selectedDate() ? (selectedDate() | date: 'EEEE') : '—' }}
+        <i class="fas fa-chevron-down"></i>
+      </button>
+
+      @if (dropdownOpen()) {
+        <ul class="day-select__menu">
+          @for (date of days(); track date) {
+            <li>
+              <button
+                type="button"
+                class="day-select__option"
+                [class.day-select__option--active]="date === selectedDate()"
+                (click)="selectDay(date)">
+                {{ date | date: 'EEEE' }}
+              </button>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+
+  <div class="hourly-forecast__list">
+    @if (!isLoading() && hours().length) {
+      @for (hour of hours(); track hour.time) {
+        <div class="hour-row">
+          <i class="hour-row__icon" [ngClass]="getWeatherIcon(hour.weatherCode)"></i>
+          <span class="hour-row__time">{{ hour.time | date: 'h a' }}</span>
+          <span class="hour-row__temp">{{ hour.temperature | number: '1.0-0' }}°</span>
+        </div>
+      }
+    } @else {
+      @for (_ of skeletonHours; track $index) {
+        <div class="hour-row hour-row--skeleton"></div>
+      }
+    }
+  </div>
+</div>

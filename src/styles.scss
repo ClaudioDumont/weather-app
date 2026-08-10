@@ -1,12 +1,10 @@
-/* src/styles.scss - WEATHER APP | FRONTEND MENTOR STYLE GUIDE */
-
 /* ==========================================================================
    FONTES GOOGLE - IMPORTS
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600&family=Bricolage+Grotesque:ital,wght@0,700&display=swap');
 
 /* ==========================================================================
-   1. RESET & BASE
+    RESET & BASE
    ========================================================================== */
 *,
 *::before,
@@ -25,15 +23,15 @@ html, body {
 
 body {
   font-family: 'DM Sans', sans-serif;
-  font-size: 18px; /* Body copy do style guide */
+  font-size: 18px; 
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background: hsl(243, 96%, 9%); /* Neutral 900 */
-  color: hsl(0, 0%, 100%); /* Neutral 0 */
+  background: hsl(243, 96%, 9%); 
+  color: hsl(0, 0%, 100%); 
 }
 
 /* ==========================================================================
-   2. VARIÁVEIS CSS - EXATAS DO STYLE GUIDE
+    VARIABLES
    ========================================================================== */
 :root {
   /* Neutral */
@@ -61,13 +59,13 @@ body {
 }
 
 /* ==========================================================================
-   3. TIPOGRAFY
+    TIPOGRAFY
    ========================================================================== */
 
 h1{
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 700;
-  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-size: clamp(3rem, 6vw, 3.2rem);
   color: var(--neutral-0);
   text-align: center;
 }
@@ -78,90 +76,25 @@ h2 {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
 }
 
-.page-title {
-    font-size: clamp(2rem, 4vw, 2.25rem);
-    font-weight: bold;
+
+
+.section-title {
+  font-size: 1.25rem;
+  margin-bottom:var(--spacing-sm) ;
 }
 
+
 /* ==========================================================================
-   4. LAYOUT - 375px Mobile | 1440px Desktop
+    FORM RESETS
    ========================================================================== */
-.app-container {
-  min-height: 100vh;
-  max-width: 1440px; /* Desktop do style guide */
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  
-  @media (max-width: 375px) {
-    padding: 1.5rem 1rem; /* Mobile do style guide */
-  }
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-xl);
-}
-
-.main-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-  }
-}
-
-.daily-forecast {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: var(--spacing-md);
+input,
+button {
+    font-family: 'DM Sans', sans-serif;
+    line-height: 100%;
 }
 
 /* ==========================================================================
-   5. CARDS - Glassmorphism + Backdrop
-   ========================================================================== */
-.card {
-  background: var(--neutral-800);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--neutral-600);
-  border-radius: 20px;
-  padding: var(--spacing-lg);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  &:hover {
-    background: var(--neutral-700);
-    border-color: var(--blue-500);
-    transform: translateY(-4px);
-  }
-}
-
-.weather-main {
-  background: var(--neutral-900);
-  border-radius: 20px;
-  padding: var(--spacing-xl);
-}
-
-/* ==========================================================================
-   6. FORMULÁRIOS & BOTÕES
-   ========================================================================== */
-
-    input,
-    button {
-        font-family: 'DM Sans', sans-serif;
-        line-height: 100%;
-    }
-
-
-/* ==========================================================================
-   7. UTILITÁRIOS & ESTADOS
-   ========================================================================== */
-/* ==========================================================================
-   8. RESPONSIVO - WCAG Compliant
+    RESPONSIVE
    ========================================================================== */
 @media (max-width: 375px) {
   body { font-size: 16px; } /* Mobile body copy */
@@ -172,7 +105,16 @@ h2 {
   .app-container { padding: 3rem; }
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .card { border-width: 2px; }
+/* ==========================================================================
+    SKELETON / LOADING STATES
+   ========================================================================== */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
 }

@@ -1,0 +1,29 @@
+.weather-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &__item {
+    background: var(--neutral-800);
+    border: 1px solid var(--neutral-600);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  &__label {
+    color: var(--neutral-300);
+    font-size: 0.95rem;
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}

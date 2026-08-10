@@ -1,12 +1,36 @@
-<div class="search-container">
-    <input 
-        class="search-container__input"
-        [(ngModel)]="searchQuery" 
-        (keyup.enter)="onSearch()"
-        placeholder="Search for a place..." 
+<div class="search-container" (keydown)="onKeydown($event)">
+  <div class="search-container__field">
+    <input
+      class="search-container__input"
+      [ngModel]="searchQuery"
+      (ngModelChange)="onInputChange($event)"
+      (keyup.enter)="onSearch()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      placeholder="Search for a place..."
+      autocomplete="off"
+      role="combobox"
+      aria-autocomplete="list"
+      [attr.aria-expanded]="suggestionsOpen"
     />
-    <button class="search-container__button"
-          (click)="onSearch()">
-          Search
-    </button>
+
+    @if (suggestionsOpen) {
+      <ul class="search-container__suggestions" role="listbox">
+        @for (place of suggestions; track place.latitude + '-' + place.longitude; let i = $index) {
+          <li role="option">
+            <button
+              type="button"
+              class="search-container__suggestion"
+              [class.search-container__suggestion--active]="i === activeIndex"
+              (mousedown)="$event.preventDefault()"
+              (click)="selectSuggestion(place)">
+              {{ formatPlaceLabel(place) }}
+            </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+
+  <button class="search-container__button" (click)="onSearch()">Search</button>
 </div>

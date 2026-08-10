@@ -1,1 +1,27 @@
-<p>weather-card works!</p>
+@if (state$ | async; as state) {
+  <div
+    class="weather-card-container"
+    [class.weather-card-container--placeholder]="state.loading || state.error">
+    @if (state.loading) {
+      <div class="weather-card-loading">
+        <div class="weather-card-loading__dots"><span></span><span></span><span></span></div>
+        <p class="weather-card-loading__text">Loading...</p>
+      </div>
+    }
+    @if (!state.loading && state.error) {
+      <p class="weather-card-error">{{ state.error }}</p>
+    }
+    @if (!state.loading && !state.error && state.current) {
+      <div class="location">
+        <div class="location__name">{{ state.locationName }}, {{ state.country }}</div>
+        <div class="location__date">
+          {{ state.daily[0]?.date | date: 'EEEE, MMMM d, y' }}
+        </div>
+      </div>
+      <div class="temperature">
+        <i class="fas fa-sun temperature__icon"></i>
+        <div class="temperature__value">{{ state.current.temperature | number: '1.0-0' }}°</div>
+      </div>
+    }
+  </div>
+}

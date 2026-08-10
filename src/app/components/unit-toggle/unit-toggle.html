@@ -1,1 +1,90 @@
-<p>unit-toggle works!</p>
+<div class="unit-toggle">
+  <button type="button" class="unit-toggle__trigger" (click)="toggleMenu()">
+    <i class="fa-solid fa-gear"></i>
+    Units
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  @if (open()) {
+    <div class="unit-toggle__menu">
+      <button type="button" class="unit-toggle__switch" (click)="toggleSystem()">
+        Switch to {{ isImperial() ? 'Metric' : 'Imperial' }}
+      </button>
+      <div class="unit-toggle__group">
+        <span class="unit-toggle__label">Temperature</span>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().temperature === 'celsius'"
+          (click)="setTemperature('celsius')"
+        >
+          Celsius (°C)
+          @if (units().temperature === 'celsius') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().temperature === 'fahrenheit'"
+          (click)="setTemperature('fahrenheit')"
+        >
+          Fahrenheit (°F)
+          @if (units().temperature === 'fahrenheit') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+      </div>
+      <div class="unit-toggle__group">
+        <span class="unit-toggle__label">Wind Speed</span>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().wind === 'kmh'"
+          (click)="setWind('kmh')"
+        >
+          km/h
+          @if (units().wind === 'kmh') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().wind === 'mph'"
+          (click)="setWind('mph')"
+        >
+          mph
+          @if (units().wind === 'mph') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+      </div>
+      <div class="unit-toggle__group">
+        <span class="unit-toggle__label">Precipitation</span>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().precipitation === 'mm'"
+          (click)="setPrecipitation('mm')"
+        >
+          Millimeters (mm)
+          @if (units().precipitation === 'mm') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+        <button
+          type="button"
+          class="unit-toggle__option"
+          [class.unit-toggle__option--active]="units().precipitation === 'inch'"
+          (click)="setPrecipitation('inch')"
+        >
+          Inches (in)
+          @if (units().precipitation === 'inch') {
+            <i class="fas fa-check"></i>
+          }
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,48 @@
+@if (state$ | async; as state) {
+  <div class="weather-metrics">
+    @if (units$ | async; as units) {
+      <div class="weather-metrics__item">
+        <span class="weather-metrics__label">Feels Like</span>
+        <span class="weather-metrics__value">
+          {{
+            !state.loading && state.current
+              ? (state.current.feelsLike | number: '1.0-0') + '°'
+              : '—'
+          }}
+        </span>
+      </div>
+      <div class="weather-metrics__item">
+        <span class="weather-metrics__label">Humidity</span>
+        <span class="weather-metrics__value">
+          {{
+            !state.loading && state.current ? (state.current.humidity | number: '1.0-0') + '%' : '—'
+          }}
+        </span>
+      </div>
+      <div class="weather-metrics__item">
+        <span class="weather-metrics__label">Wind</span>
+        <span class="weather-metrics__value">
+          {{
+            !state.loading && state.current
+              ? (state.current.windSpeed | number: '1.0-0') +
+                ' ' +
+                (units.wind === 'mph' ? 'mph' : 'km/h')
+              : '—'
+          }}
+        </span>
+      </div>
+      <div class="weather-metrics__item">
+        <span class="weather-metrics__label">Precipitation</span>
+        <span class="weather-metrics__value">
+          {{
+            !state.loading && state.current
+              ? (state.current.precipitation | number: '1.0-2') +
+                ' ' +
+                (units.precipitation === 'inch' ? 'in' : 'mm')
+              : '—'
+          }}
+        </span>
+      </div>
+    }
+  </div>
+}

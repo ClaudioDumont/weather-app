@@ -1,18 +1,21 @@
-<p>daily-forecast works!</p>
-<!-- sol -->
-<i class="fas fa-sun"></i>
-
-<!-- nuvem -->
-<i class="fas fa-cloud"></i>
-
-<!-- chuva -->
-<i class="fas fa-cloud-rain"></i>
-
-<!-- neve -->
-<i class="fas fa-snowflake"></i>
-
-<!-- trovoada -->
-<i class="fas fa-bolt"></i>
-
-<!-- vento -->
-<i class="fas fa-wind"></i>
+@if (state$ | async; as state) {
+  <h2 class="section-title">Daily forecast</h2>
+  <div class="daily-forecast">
+    @if (!state.loading && state.daily.length) {
+      @for (day of state.daily; track day.date) {
+        <div class="day-card">
+          <div class="day-card__name">{{ day.date | date: 'EEE' }}</div>
+          <i class="day-card__icon" [ngClass]="getWeatherIcon(day.weatherCode)"></i>
+          <div class="day-card__temps">
+            <span class="day-card__max">{{ day.tempMax | number: '1.0-0' }}°</span>
+            <span class="day-card__min">{{ day.tempMin | number: '1.0-0' }}°</span>
+          </div>
+        </div>
+      }
+    } @else {
+      @for (_ of skeletonDays; track $index) {
+        <div class="day-card day-card--skeleton"></div>
+      }
+    }
+  </div>
+}
