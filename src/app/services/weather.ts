@@ -106,14 +106,12 @@ export class Weather {
   private readonly unitsSubject = new BehaviorSubject<Units>(METRIC_UNITS);
   readonly units$: Observable<Units> = this.unitsSubject.asObservable();
 
-  /** Last place with a loaded forecast, kept so we can refetch when units change. */
   private lastPlace: GeocodingResult | null = null;
 
   get units(): Units {
     return this.unitsSubject.value;
   }
 
-  /** Used for autocomplete: returns matching places for a partial query, without touching the shared state. */
   getSuggestions(query: string): Observable<GeocodingResult[]> {
     const name = query.trim();
     if (!name) {
@@ -127,7 +125,6 @@ export class Weather {
       .pipe(map((res) => res.results ?? []));
   }
 
-  /** Loads the forecast for a place the user picked from the autocomplete list. */
   selectPlace(place: GeocodingResult): void {
     this.loadForecast(place);
   }
