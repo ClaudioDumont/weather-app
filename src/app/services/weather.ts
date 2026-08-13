@@ -112,7 +112,7 @@ export class Weather {
     return this.unitsSubject.value;
   }
 
-  getSuggestions(query: string): Observable<GeocodingResult[]> {
+  public getSuggestions(query: string): Observable<GeocodingResult[]> {
     const name = query.trim();
     if (!name) {
       return of([]);
@@ -129,7 +129,7 @@ export class Weather {
     this.loadForecast(place);
   }
 
-  searchLocation(query: string): void {
+  public searchLocation(query: string): void {
     const name = query.trim();
     if (!name) {
       return;
@@ -161,8 +161,7 @@ export class Weather {
       .subscribe();
   }
 
-  /** Updates one or more units and, if a location is already loaded, re-fetches its forecast in the new units. */
-  setUnits(partial: Partial<Units>): void {
+  public setUnits(partial: Partial<Units>): void {
     this.unitsSubject.next({ ...this.unitsSubject.value, ...partial });
 
     if (this.lastPlace) {
@@ -170,7 +169,7 @@ export class Weather {
     }
   }
 
-  toggleUnitSystem(): void {
+  public toggleUnitSystem(): void {
     const isImperial = this.unitsSubject.value.temperature === 'fahrenheit';
     this.setUnits(isImperial ? METRIC_UNITS : IMPERIAL_UNITS);
   }

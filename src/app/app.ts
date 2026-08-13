@@ -23,7 +23,6 @@ import { Weather } from './services/weather';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('weather-app');
   protected readonly weatherService = inject(Weather);
   protected readonly state$ = this.weatherService.state$;
 }
